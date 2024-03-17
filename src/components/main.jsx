@@ -181,7 +181,7 @@ function MainPage({ city, headerani }) {
                     <AccordionItem key={x.dt}>
                       <AccordionItemHeading>
                         <AccordionItemButton>
-                          <div className="transition-all grid grid-cols-8 w-full text-white gap-x-8">
+                          <div className="transition-all grid grid-cols-8 w-full text-white gap-x-7">
                             <div className="transition-all w-24 h-18 flex  drop-shadow-lg shadow-lg shadow-slate-600 mt-10  bg-sky-600 rounded-xl ">
                               <img
                                 src={weatherIcon}
