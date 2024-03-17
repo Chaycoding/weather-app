@@ -1,7 +1,8 @@
 import { useScrollPosition } from "./hooks/useScrollPosition";
 import Search from "./search";
 import Clock from "./clock";
-function Header({ setCity }) {
+
+function Header({ setCity, setHeaderani, headerani }) {
   const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
   let datetime_str = new Date().toLocaleString("en-US", {
     timeZone: timeZone,
@@ -9,13 +10,16 @@ function Header({ setCity }) {
 
   const scrollPosition = useScrollPosition();
   let position =
-    scrollPosition > 40 ? "transitionheader" : "transitionheaderrev";
+    scrollPosition > 40 || headerani
+      ? "transitionheader"
+      : "transitionheaderrev";
 
   const attachment = `w-full fixed top-0  bg-headerimg bg-cover bg-white transition-all z-10 h-[5rem]   ${position}`;
 
   const handleOnsearchChange = (searchData) => {
     const [latitude, longitude] = searchData.value.split(" ");
     setCity({ lat: latitude, lon: longitude });
+    setHeaderani(true);
   };
 
   return (

@@ -18,7 +18,7 @@ import snow from "./images/Ani-icons/snow.svg";
 import thunderstorm from "./images/Ani-icons/thunderstorm.svg";
 import { useScrollPosition } from "./hooks/useScrollPosition";
 
-function MainPage({ city }) {
+function MainPage({ city, headerani }) {
   const [style, setStyle] = useState(false);
   const [url, setUrl] = useState("");
   // const [nasa, setNasa] = useState();
@@ -26,7 +26,7 @@ function MainPage({ city }) {
   const moreInfoStyle = `drop-shadow-lg flex justify-center items-center shadow-lg h-48 shadow-slate-600 transition-all ${stylz}`;
 
   const scrollPosition = useScrollPosition();
-  let position = scrollPosition > 40 ? "mt-[15rem]" : "mt-96";
+  let position = scrollPosition > 40 || headerani ? "mt-[15rem]" : "mt-96";
 
   const mainclasses = `transition-all duration-1000 h-[100rem] ${position}`;
 
@@ -89,6 +89,11 @@ function MainPage({ city }) {
 
   //   console.log("thing 3");
   // }, []);
+
+  function getDayName(dateStr) {
+    var date = new Date(dateStr);
+    return date.toLocaleDateString("en-us", { weekday: "long" });
+  }
 
   return (
     <div className={mainclasses}>
@@ -168,23 +173,43 @@ function MainPage({ city }) {
         <Accordion allowZeroExpanded>
           {currentWeather
             ? currentWeather.list.map((x) => {
-                if (x.dt_txt.slice(11, 13) == "00") {
+                if (x.dt_txt.slice(11, 13) == "03") {
+                  console.log(x, "accor");
                   const icon1 = x.weather[0].icon;
                   const weatherIcon = `https://openweathermap.org/img/wn/${icon1}@2x.png`;
                   return (
                     <AccordionItem key={x.dt}>
                       <AccordionItemHeading>
                         <AccordionItemButton>
-                          <div className="transition-all grid grid-cols-8 w-full gap-x-8">
-                            <div className="transition-all drop-shadow-lg shadow-lg shadow-slate-600 mt-10  bg-sky-600 rounded-xl ">
+                          <div className="transition-all grid grid-cols-8 w-full text-white gap-x-8">
+                            <div className="transition-all w-18 h-18 flex  drop-shadow-lg shadow-lg shadow-slate-600 mt-10  bg-sky-600 rounded-xl ">
                               <img
                                 src={weatherIcon}
                                 alt=""
-                                className=" w-18 h-18 transition-all"
+                                className="  transition-all"
                               />
                             </div>
-                            <div className="transition-all drop-shadow-lg shadow-lg shadow-slate-600 mt-10  bg-sky-600 rounded-xl col-span-7">
-                              other area
+                            <div className="transition-all flex drop-shadow-lg shadow-lg shadow-slate-600 mt-10 py-3 bg-sky-600 rounded-xl col-span-7">
+                              <div className="text-2xl border-r-2 w-48 flex flex-col items-center justify-center border-black">
+                                <p>{getDayName(x.dt_txt.slice(0, 11))}</p>
+                                <p className="text-xs">
+                                  {x.dt_txt.slice(0, 11)}
+                                </p>
+                              </div>
+                              <div className="transition-all mt-3 text-xl pl-10  items-center flex pb-4">
+                                <p className="text-4xl ">
+                                  {Math.round(x.main.temp)}
+                                  <span> °</span>
+                                </p>
+                                <div>
+                                  <p className="text-2xl capitalize ml-14 font-semibold ">
+                                    {x.weather[0].main}
+                                  </p>
+                                  <p className="text-xl capitalize ml-14 font-semibold ">
+                                    {x.weather[0].description}
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </AccordionItemButton>

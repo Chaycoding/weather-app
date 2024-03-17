@@ -7,13 +7,20 @@ import { useState } from "react";
 
 function Allpages() {
   const [city, setCity] = useState(false);
-
+  const [headerani, setHeaderani] = useState(false);
   return (
     <HashRouter>
       <ScrollToTop />
-      <Header setCity={setCity} />
+      <Header
+        setCity={setCity}
+        setHeaderani={setHeaderani}
+        headerani={headerani}
+      />
       <Routes>
-        <Route path="/" element={<MainPage city={city} />} />
+        <Route
+          path="/"
+          element={<MainPage city={city} headerani={headerani} />}
+        />
       </Routes>
     </HashRouter>
   );
