@@ -114,13 +114,13 @@ function MainPage({ city, headerani }) {
                 </button>
 
                 <div className=" w-full  transition-all text-lg">
-                  <p className="transition-all capitalize  drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]  font-medium">
+                  <p className="transition-all capitalize    font-medium">
                     {todayWeather.weather[0].description}
                   </p>
-                  <p className="transition-all capitalize  drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]  font-medium">
+                  <p className="transition-all capitalize    font-medium">
                     Feels like {todayWeather.main.feels_like}
                   </p>
-                  <p className="transition-all capitalize  drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]  font-medium">
+                  <p className="transition-all capitalize    font-medium">
                     Humidity {todayWeather.main.humidity}
                   </p>
                 </div>
@@ -182,7 +182,7 @@ function MainPage({ city, headerani }) {
                       <AccordionItemHeading>
                         <AccordionItemButton>
                           <div className="transition-all grid grid-cols-8 w-full text-white gap-x-8">
-                            <div className="transition-all w-18 h-18 flex  drop-shadow-lg shadow-lg shadow-slate-600 mt-10  bg-sky-600 rounded-xl ">
+                            <div className="transition-all w-24 h-18 flex  drop-shadow-lg shadow-lg shadow-slate-600 mt-10  bg-sky-600 rounded-xl ">
                               <img
                                 src={weatherIcon}
                                 alt=""
